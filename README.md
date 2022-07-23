@@ -8,11 +8,9 @@
 - To run this project please run "npm start"
 - To test project please run "npm run test". In this project i have used "mocha" and "chai" for unit testing.
 
-# Task
+# Description
 
 ## Situation
-
-Paysera users can go to a branch to cash in and/or cash out from Paysera account. There are also commission fees for both cash in and cash out. Only supported currency is EUR.
 
 ## Commission Fees
 
