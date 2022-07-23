@@ -4,5 +4,8 @@ import { config as dotenv } from 'dotenv'
 dotenv({path: dotEnvPath()})
 
 export default {
-    databaseConnectionString: `mongodb+srv://${process.env.DATABASE_USER}:${process.env.DATABASE_PASSWORD}@cluster0.oafie.mongodb.net/${process.env.DATABASE_NAME}?retryWrites=true&w=majority`
+    cashIn: `${process.env.CASH_IN}`,
+    cashOutNatural: `${process.env.CASH_OUT_NATURAL}`,
+    cashOutJuridical: `${process.env.CASH_OUT_JURIDICAL}`,
+    daysOfWeek: ['sunday','monday','tuesday','wednesday','thursday','friday','saturday'],
 }

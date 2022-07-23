@@ -29,14 +29,12 @@ export const cashTransaction:RequestHandler = async (req, res, next) => {
             type,
             operation
         )
-        cashTransactionOperation(requestParams)
-        // newTodo = await TodoModel.create()
+        let result:any = await cashTransactionOperation(requestParams)
+
+        return res.status(200).json({
+            result
+        })
     } catch (error:any) {
         throw new Error(error)
     }
-
-    return res.status(201).json({
-        message: 'Todo is created.',
-        // data: newTodo
-    })
 }
