@@ -2,6 +2,7 @@ import { RequestHandler } from 'express'
 import { validationResult } from 'express-validator'
 import { cashTransactionOperation } from '../lib/CashTransactionOperation'
 import { CashTransactionType } from './types/cashTransactionType'
+import globalConfig from '../config/global.config'
 
 export const cashTransaction:RequestHandler = async (req, res, next) => {
     const error = validationResult(req)
@@ -29,10 +30,18 @@ export const cashTransaction:RequestHandler = async (req, res, next) => {
             type,
             operation
         )
-        let result:any = await cashTransactionOperation(requestParams)
+        let result:number = Number(await cashTransactionOperation(requestParams))
 
+        let isCent:boolean = false
+
+        if(result<1 && result !== 0){
+            result = Math.ceil(100*result)/100
+            isCent = true
+        }
+        let cash_in_constant = globalConfig.cashInConstant
+        let output = isCent ? (result.toFixed(2)+` cents ${cash_in_constant.max.currency}`) : result.toFixed(2) +` ${cash_in_constant.max.currency}`
         return res.status(200).json({
-            result
+            result: output
         })
     } catch (error:any) {
         throw new Error(error)
