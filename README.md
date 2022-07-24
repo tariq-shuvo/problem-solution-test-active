@@ -15,12 +15,12 @@ After run this project by typing "npm start"
 #### API
 A post request for checking form validations and getting the result
 sample raw json data
-# operation date in format `Y-m-d`
-# user id, integer
-# user type, one of “natural”(natural person) or “juridical”(legal person)
-# operation type, one of “cash_in” or “cash_out”
-# operation amount(for example `2.12` or `3`)
-# operation currency `EUR`
+1. operation date in format `Y-m-d`
+2. user id, integer
+3. user type, one of “natural”(natural person) or “juridical”(legal person)
+4. operation type, one of “cash_in” or “cash_out”
+5. operation amount(for example `2.12` or `3`)
+6. operation currency `EUR`
 
 ```js
 {
