@@ -1,6 +1,8 @@
+import { isSameWeek, naturalUserCashOuts } from './CheckDate';
 import axios from 'axios'
 import globalConfig from '../config/global.config'
 import { CashTransactionType } from "../controller/types/cashTransactionType"
+import CashoutType from '../models/types/CashoutType';
 
 export const cashTransactionOperation = async (receivedInfo: CashTransactionType)=> {
     let cash_in_constant = globalConfig.cashInConstant
@@ -43,8 +45,45 @@ export const cashTransactionOperation = async (receivedInfo: CashTransactionType
                     }
                 }
 
+                let getCashoutInfos:CashoutType[] = naturalUserCashOuts.filter(cashoutInfo => cashoutInfo.user_id === receivedInfo.user_id)
+                let flag:boolean = false, amount:number = 0;
+
                 if(receivedInfo.operation.amount>cash_out_constant.natural.week_limit.amount){
                     commission = (receivedInfo.operation.amount - cash_out_constant.natural.week_limit.amount) * (cash_out_constant.natural.percents/100) 
+                }else{
+                    if(getCashoutInfos.length>0){
+                        let loopDatesOfCashout:any = getCashoutInfos[0].data.map((dataInfo:{date: string, amount:number})=>{
+                            if(isSameWeek(receivedInfo.date, dataInfo.date)==true){
+                                flag = true;
+                                amount += dataInfo.amount
+                            }
+                        })
+
+                        await Promise.all(loopDatesOfCashout)
+
+                        if(flag){
+                            if(amount>cash_out_constant.natural.week_limit.amount){
+                                commission = receivedInfo.operation.amount * (cash_out_constant.natural.percents/100)
+                            }else{
+                                commission = (receivedInfo.operation.amount - cash_out_constant.natural.week_limit.amount) * (cash_out_constant.natural.percents/100)
+                            }
+                        }
+                    }
+                }
+
+                if(getCashoutInfos.length>0){
+                    naturalUserCashOuts[naturalUserCashOuts.indexOf(getCashoutInfos[0])].data.push({
+                        date: receivedInfo.date,
+                        amount: receivedInfo.operation.amount  
+                      })
+                }else{
+                    naturalUserCashOuts.push({
+                        user_id: receivedInfo.user_id,
+                        data: [{
+                            date: receivedInfo.date,
+                            amount: receivedInfo.operation.amount
+                        }]
+                    })
                 }
             }else if(receivedInfo.user_type === "juridical"){
                 const response = await axios.get(globalConfig.cashOutJuridical)

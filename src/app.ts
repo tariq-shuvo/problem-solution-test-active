@@ -4,6 +4,7 @@ import fs from 'fs'
 import { json } from 'body-parser'
 
 import cashTranscationRoutes from './routes/cashTranscations'
+import { naturalUserCashOuts } from './lib/CheckDate';
 
 const port = 3000;
 const app = express()
@@ -21,6 +22,7 @@ fs.readFile("./input.json", "utf8", async (err, jsonString) => {
         let result = await cashTransactionOperation(jsonDataList[i])
         console.log(result)
     }
+    naturalUserCashOuts.splice(0)
 });
 
 app.use('/cash-transaction', cashTranscationRoutes)

@@ -13,8 +13,10 @@
 After run this project by typing "npm start"
 
 #### API
+
 A post request for checking form validations and getting the result
 sample raw json data
+
 1. operation date in format `Y-m-d`
 2. user id, integer
 3. user type, one of “natural”(natural person) or “juridical”(legal person)
@@ -26,14 +28,15 @@ sample raw json data
 {
     "date": "2016-01-05",
     "user_id": 1,
-    "user_type": "natural", 
-    "type": "cash_in", 
+    "user_type": "natural",
+    "type": "cash_in",
     "operation": {
         "amount": 200,
-        "currency": "EUR" 
+        "currency": "EUR"
     }
 }
 ```
+
 You can post data to [http://localhost:3000/cash-transaction](http://localhost:3000/cash-transaction)
 
 # Example Data
@@ -41,20 +44,77 @@ You can post data to [http://localhost:3000/cash-transaction](http://localhost:3
 Example data has been placed in json file location at root of the project when run "npm start" you will get output in console
 
 input.json
+
 ```json
 [
-    { "date": "2016-01-05", "user_id": 1, "user_type": "natural", "type": "cash_in", "operation": { "amount": 200.00, "currency": "EUR" } },
-    { "date": "2016-01-06", "user_id": 2, "user_type": "juridical", "type": "cash_out", "operation": { "amount": 300.00, "currency": "EUR" } },
-    { "date": "2016-01-06", "user_id": 1, "user_type": "natural", "type": "cash_out", "operation": { "amount": 30000, "currency": "EUR" } },
-     { "date": "2016-01-07", "user_id": 1, "user_type": "juridical", "type": "cash_out", "operation": { "amount": 1000.00, "currency": "EUR" } },
-    { "date": "2016-01-07", "user_id": 1, "user_type": "juridical", "type": "cash_out", "operation": { "amount": 100.00, "currency": "EUR" } },
-    { "date": "2016-01-10", "user_id": 1, "user_type": "juridical", "type": "cash_out", "operation": { "amount": 100.00, "currency": "EUR" } },
-    { "date": "2016-01-10", "user_id": 2, "user_type": "juridical", "type": "cash_in", "operation": { "amount": 1000000.00, "currency": "EUR" } },
-    { "date": "2016-01-10", "user_id": 3, "user_type": "natural", "type": "cash_out", "operation": { "amount": 1000.00, "currency": "EUR" } },
-    { "date": "2016-02-15", "user_id": 1, "user_type": "natural", "type": "cash_out", "operation": { "amount": 300.00, "currency": "EUR" } },
+  {
+    "date": "2016-01-05",
+    "user_id": 1,
+    "user_type": "natural",
+    "type": "cash_in",
+    "operation": { "amount": 200.0, "currency": "EUR" }
+  },
+  {
+    "date": "2016-01-06",
+    "user_id": 2,
+    "user_type": "juridical",
+    "type": "cash_out",
+    "operation": { "amount": 300.0, "currency": "EUR" }
+  },
+  {
+    "date": "2016-01-06",
+    "user_id": 1,
+    "user_type": "natural",
+    "type": "cash_out",
+    "operation": { "amount": 30000, "currency": "EUR" }
+  },
+  {
+    "date": "2016-01-07",
+    "user_id": 1,
+    "user_type": "natural",
+    "type": "cash_out",
+    "operation": { "amount": 1000.0, "currency": "EUR" }
+  },
+  {
+    "date": "2016-01-07",
+    "user_id": 1,
+    "user_type": "natural",
+    "type": "cash_out",
+    "operation": { "amount": 100.0, "currency": "EUR" }
+  },
+  {
+    "date": "2016-01-10",
+    "user_id": 1,
+    "user_type": "natural",
+    "type": "cash_out",
+    "operation": { "amount": 100.0, "currency": "EUR" }
+  },
+  {
+    "date": "2016-01-10",
+    "user_id": 2,
+    "user_type": "juridical",
+    "type": "cash_in",
+    "operation": { "amount": 1000000.0, "currency": "EUR" }
+  },
+  {
+    "date": "2016-01-10",
+    "user_id": 3,
+    "user_type": "natural",
+    "type": "cash_out",
+    "operation": { "amount": 1000.0, "currency": "EUR" }
+  },
+  {
+    "date": "2016-02-15",
+    "user_id": 1,
+    "user_type": "natural",
+    "type": "cash_out",
+    "operation": { "amount": 300.0, "currency": "EUR" }
+  }
 ]
 ```
-➜  output in console
+
+➜ output in console
+
 ```
     0.06
     0.90
